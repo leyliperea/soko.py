@@ -5,6 +5,7 @@
 4-Piso
 5-Personaje meta
 6-caja meta
+"""
 
 
 #define el mapa de juego
