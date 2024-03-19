@@ -1,0 +1,109 @@
+    mapa = [] # mapa del juego
+    personaje_columna = 0
+    personaje_fila = 0
+
+    def __init__(self):
+        # Define el mapa de juego
+        self.mapa =[
+          [3,3,3,3,3,3,3,3,3,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,4,4,4,0,4,4,4,4,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,4,4,4,4,4,4,4,4,3],
+          [3,3,3,3,3,3,3,3,3,3]
+        ]
+
+        # Definimos la posicion inicial del personaje
+        self.personaje_columna = 2
+        self.personaje_fila = 2
+
+    def imprimirMapa(self):
+        for filas in self.mapa:
+            print(filas)
+
+
+    def derecha(self):
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 0 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 4:
+            self.movimiento1()
+            self.personaje_columna += 1
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 0 and self.mapa[self.personaje_fila][self.personaje_columna+1] == 2 :
+            self.movimiento5()
+    def izquierda(self):  
+        if self.mapa[self.personaje_fila][self.personaje_columna] ==0 and self.mapa [self.personaje_fila][self.personaje_columna-1] == 4:
+            self.movimiento2()
+            self.personaje_columna -= 1
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 0 and self.mapa[self.personaje_fila][self.personaje_columna-1] == 2 :
+          self.movimiento6()
+
+    def arriba(self):
+      # Verifica si el espacio arriba es piso y si el personaje puede moverse hacia arriba
+        if self.mapa[self.personaje_fila - 1][self.personaje_columna] == 4 and self.mapa[self.personaje_fila][self.personaje_columna] == 0 :
+            self.movimiento3()
+            self.personaje_fila -= 1
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 0 and self.mapa[self.personaje_fila-1][self.personaje_columna] == 2 :
+          self.movimiento7()
+
+
+    def abajo(self):
+        if self.mapa[self.personaje_fila + 1][self.personaje_columna] == 4 and self.mapa[self.personaje_fila][self.personaje_columna] == 0 :
+            self.movimiento4()
+            self.personaje_fila += 1
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 0 and self.mapa[self.personaje_fila+1][self.personaje_columna] == 2 :
+          self.movimiento8()
+
+    def movimiento1(self):
+      # Donde estaba el persona pone un piso
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      # Donde estaba el piso pone al personaje
+      self.mapa[self.personaje_fila][self.personaje_columna + 1] = 0
+    def movimiento2(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      # Donde estaba el piso pone al personaje
+      self.mapa[self.personaje_fila][self.personaje_columna - 1] = 0
+    def movimiento3(self):
+      # Donde estaba el persona pone un piso
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      # Donde estaba el piso pone al personaje
+      self.mapa[self.personaje_fila - 1][self.personaje_columna] = 0
+    def movimiento4(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      # Donde estaba el piso pone al personaje
+      self.mapa[self.personaje_fila +1][self.personaje_columna] = 0
+    def movimiento5(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      self.mapa[self.personaje_fila][self.personaje_columna +1] = 5
+    def movimiento6(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      self.mapa[self.personaje_fila][self.personaje_columna -1] = 5
+    def movimiento7(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      self.mapa[self.personaje_fila-1][self.personaje_columna] = 5
+    def movimiento8(self):
+     self.mapa[self.personaje_fila][self.personaje_columna] = 4
+     self.mapa[self.personaje_fila+1][self.personaje_columna] = 5
+  
+
+
+    def jugar(self):
+        while True:
+            self.imprimirMapa()
+            # Pide al usuario el movimiento
+            movimiento = input("Selecciona el movimiento d(derecha),a(izquierda),w(arriba)y s(abajo): ")
+            # Moverse a la derecha
+            if movimiento == 'd':
+                self.derecha()
+            # Moverse a la izquierda
+            elif movimiento == 'a':
+                self.izquierda()
+            elif movimiento == 'w':
+                self.arriba()
+                 # Moverse hacia abajo
+            elif movimiento == 's':
+                self.abajo()
+
+
+soko = Soko()
+soko.jugar()
