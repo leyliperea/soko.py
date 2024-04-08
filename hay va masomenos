@@ -1,0 +1,250 @@
+    class Soko:
+      niveles = [
+          [
+              [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+              [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+              [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+              [3, 4, 4, 4, 4, 1, 4, 4, 4, 3],
+              [3, 4, 4, 4, 1, 0, 1, 4, 4, 3],
+              [3, 4, 4, 4, 4, 1, 4, 4, 4, 3],
+              [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+              [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+              [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+          ],
+          [
+              # Definir el segundo nivel aquí
+              # ...
+             [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+             [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+             [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+             [3, 4, 4, 4, 4, 6, 4, 4, 4, 3],
+             [3, 4, 4, 4, 4, 4, 4, 1, 4, 3],
+             [3, 4, 4, 4, 4, 1, 4, 4, 4, 3],
+             [3, 4, 4, 4, 4, 0, 4, 4, 4, 3],
+             [3, 4, 4, 4, 4, 4, 4, 4, 4, 3],
+             [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+          ]
+      ]
+    
+      def __init__(self, nivel):
+          # Define el mapa del nivel seleccionado
+          self.mapa = self.niveles[nivel]
+    
+          # Encuentra la posición inicial del personaje en el nivel
+          for i in range(len(self.mapa)):
+              for j in range(len(self.mapa[0])):
+                  if self.mapa[i][j] == 0:
+                      self.personaje_fila = i
+                      self.personaje_columna = j
+                      return
+    
+      def imprimir_mapa(self):
+          for fila in self.mapa:
+              print(fila)
+    
+      def derecha(self):
+          if self.mapa[self.personaje_fila][self.personaje_columna] == 0:
+              # Si el siguiente espacio es una caja, intenta empujarla
+              if self.mapa[self.personaje_fila][self.personaje_columna + 1] == 4:
+                  self.movimiento1()
+              # Si el siguiente espacio es un objetivo, empuja la caja al objetivo
+              elif self.mapa[self.personaje_fila][self.personaje_columna + 1] == 2:
+                  self.movimiento5()
+              elif self.mapa[self.personaje_fila][self.personaje_columna + 1] == 1 and self.mapa[self.personaje_fila][self.personaje_columna + 2] == 4:
+                  self.movimiento9()
+    
+      def izquierda(self):
+          if self.mapa[self.personaje_fila][self.personaje_columna] == 0:
+              if self.mapa[self.personaje_fila][self.personaje_columna - 1] == 4:
+                  self.movimiento2()
+              elif self.mapa[self.personaje_fila][self.personaje_columna - 1] == 2:
+                  self.movimiento6()
+              elif self.mapa[self.personaje_fila][self.personaje_columna - 1] == 1 and self.mapa[self.personaje_fila][self.personaje_columna - 2] == 4:
+                  self.movimiento10()
+    
+      def arriba(self):
+          if self.mapa[self.personaje_fila][self.personaje_columna] == 0:
+              if self.mapa[self.personaje_fila - 1][self.personaje_columna] == 4:
+                  self.movimiento3()
+              elif self.mapa[self.personaje_fila - 1][self.personaje_columna] == 2:
+                  self.movimiento7()
+              elif self.mapa[self.personaje_fila-1][self.personaje_columna] == 1 and self.mapa[self.personaje_fila-2][self.personaje_columna] == 4:
+                  self.movimiento11()
+    
+      def abajo(self):
+          if self.mapa[self.personaje_fila][self.personaje_columna] == 0:
+              if self.mapa[self.personaje_fila + 1][self.personaje_columna] == 4:
+                  self.movimiento4()
+              elif self.mapa[self.personaje_fila + 1][self.personaje_columna] == 2:
+                  self.movimiento8()
+              elif self.mapa[self.personaje_fila+1][self.personaje_columna] == 1 and self.mapa[self.personaje_fila+2][self.personaje_columna] == 4:
+                  self.movimiento12()
+                  
+    
+      def movimiento1(self):
+          self.mapa[self.personaje_fila][self.personaje_columna] = 4
+          self.mapa[self.personaje_fila][self.personaje_columna + 1] = 0
+          self.personaje_columna += 1
+    
+      def movimiento2(self):
+          self.mapa[self.personaje_fila][self.personaje_columna] = 4
+          self.mapa[self.personaje_fila][self.personaje_columna - 1] = 0
+          self.personaje_columna -= 1
+    
+      def movimiento3(self):
+        self.mapa[self.personaje_fila][self.personaje_columna] = 4
+        self.mapa[self.personaje_fila - 1][self.personaje_columna] = 0
+        self.personaje_fila -= 1
+  
+    def movimiento4(self):
+        self.mapa[self.personaje_fila][self.personaje_columna] = 4
+        self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+        self.personaje_fila += 1
+  
+    def movimiento5(self):
+        self.mapa[self.personaje_fila][self.personaje_columna] = 4
+        self.mapa[self.personaje_fila][self.personaje_columna + 1] = 5
+        self.personaje_columna += 1
+  
+    def movimiento6(self):
+        self.mapa[self.personaje_fila][self.personaje_columna] = 4
+        self.mapa[self.personaje_fila][self.personaje_columna - 1] = 5
+        self.personaje_columna -= 1
+  
+    def movimiento7(self):
+        self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      self.mapa[self.personaje_fila - 1][self.personaje_columna] = 5
+      self.personaje_fila -= 1
+    
+  def movimiento8(self):
+      self.mapa[self.personaje_fila][self.personaje_columna] = 4
+      self.mapa[self.personaje_fila + 1][self.personaje_columna] = 5
+      self.personaje_fila += 1
+    
+  def movimiento9(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila][self.personaje_columna + 1] = 0
+    self.mapa[self.personaje_fila][self.personaje_columna + 2] = 1
+    self.personaje_columna += 1
+    
+  def movimiento10(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila][self.personaje_columna - 1] = 0
+    self.mapa[self.personaje_fila][self.personaje_columna - 2] = 1
+    self.personaje_columna -= 1
+    
+  def movimiento11(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+
+  def movimiento12(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila - 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila - 2][self.personaje_columna] = 1
+    self.personaje_fila += 1
+
+  def movimiento13(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento14(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento15(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento16(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento17(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento18(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento19(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento20(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento21(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento22(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento23(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  def movimiento24(self):
+    self.mapa[self.personaje_fila][self.personaje_columna] = 4
+    self.mapa[self.personaje_fila + 1][self.personaje_columna] = 0
+    self.mapa[self.personaje_fila + 2][self.personaje_columna] = 1
+    self.personaje_fila -= 1
+
+  
+  def jugar(self):
+      while True:
+          self.imprimir_mapa()
+          movimiento = input("Selecciona el movimiento d (derecha), a (izquierda), w (arriba), s (abajo): ")
+          if movimiento == 'd':
+              self.derecha()
+          elif movimiento == 'a':
+              self.izquierda()
+          elif movimiento == 'w':
+              self.arriba()
+          elif movimiento == 's':
+              self.abajo()
+
+
+def elegir_nivel():
+  while True:
+      try:
+          nivel = int(input("Selecciona el nivel (1, 2, etc.): "))
+          if nivel < 1 or nivel > len(Soko.niveles):
+              print("Por favor, selecciona un nivel válido.")
+          else:
+              return nivel - 1  # El índice de la lista es nivel - 1
+      except ValueError:
+          print("Entrada no válida. Por favor, ingresa un número entero.")
+
+
+nivel_elegido = elegir_nivel()
+soko = Soko(nivel_elegido)
+soko.jugar()
