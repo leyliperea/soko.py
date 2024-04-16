@@ -137,11 +137,11 @@ Para moverse en el juego el usuario utilizará alguna de las siguientes letras p
 
 | No. | Función | Kanban | Fecha terminación |
 | --- | --- | --- | --- |
-| 53. | Evaluar si el nivel esta terminado.  | ✔ | - |
-| 54. | Si el nivel esta terminado cargar el siguiente nivel.  | ✔ |  |
+| 53. | Evaluar si el nivel esta terminado.  |  | - |
+| 54. | Si el nivel esta terminado cargar el siguiente nivel.  |  |  |
 
 ## Función extra
 
 | No. | Función | Kanban | Fecha terminación |
 | --- | --- | --- | --- |
-| 55. | Función adicional o powerup (Fusión del personaje asi como la transformación del personaje en una caja). | ✔ |  |
+| 55. | Función adicional o powerup (Fusión del personaje asi como la transformación del personaje en una caja). |  |  |
